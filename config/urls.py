@@ -1,6 +1,7 @@
 from django.contrib import admin
-from django.conf.urls import url
+from django.urls import path, include
 
 urlpatterns = [
-    url('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
+    path('auth/', include('oauth2_provider.urls', namespace='oauth')),
 ]
