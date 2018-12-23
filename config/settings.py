@@ -30,6 +30,10 @@ THIRD_PARTY_APPS = [
     'corsheaders',
 ]
 
+PROJECT_APPS = [
+    'user',
+]
+
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
