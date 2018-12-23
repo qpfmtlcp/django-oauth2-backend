@@ -11,7 +11,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DEBUG = env.bool('DJANGO_DEBUG')
 SECRET_KEY = env('DJANGO_SECRET_KEY')
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list('HOSTS')
 
 # Application definition
 
@@ -47,10 +47,6 @@ REST_FRAMEWORK = {
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
     ),
 }
-
-LOGIN_URL = '/auth/admin/login/'
-
-LOGIN_REDIRECT_URL = '/auth/admin/profile/'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -100,10 +96,14 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = str(ROOT_DIR('static'))
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            str(ROOT_DIR.path('templates')),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -115,6 +115,3 @@ TEMPLATES = [
         },
     },
 ]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware', ]
